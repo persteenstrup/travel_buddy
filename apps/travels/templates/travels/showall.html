@@ -1,0 +1,33 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8"> {% load static %} {% load index %} {% load get_item %} {% load define %}
+    <!-- The line above tells Django to be ready to listen for static files -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
+        crossorigin="anonymous">
+
+    <!--        <link rel="stylesheet" href="{% static 'login_registration/css/style.css' %}" media="screen" title="no title"  charset="utf-8"> -->
+    <!-- Put the static files in the static folder inside your app.  Django collects files within all static folders and puts them within a single folder -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="{% static 'scripts/scripts.js' %}"></script>
+    <title>login_registration</title>
+</head>
+<body>
+    {% for objects in db_dump%}
+        <ul>
+
+            <li>{{objects.first_name}}</li>
+            <li>{{objects.last_name}}</li>
+            <li>{{objects.email}}</li>
+            <li>{{objects.password}}</li>
+            <li>{{objects.create_at}}</li>
+            <li>{{objects.updated_at}}</li>
+        </ul>
+    {% endfor %}
+</body>
+
+</html>
+

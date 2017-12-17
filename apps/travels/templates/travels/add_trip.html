@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8"> {% load static %}
+
+    <!-- The line above tells Django to be ready to listen for static files -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
+        crossorigin="anonymous">
+
+    <!--        <link rel="stylesheet" href="{% static 'travels/css/style.css' %}" media="screen" title="no title"  charset="utf-8"> -->
+    <!-- Put the static files in the static folder inside your app.  Django collects files within all static folders and puts them within a single folder -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="{% static 'scripts/scripts.js' %}"></script>
+    <title>travels</title>
+</head>
+
+<body>
+    {% if messages %}
+    <div class=container>
+    {% for message in messages %}
+    {{message}}
+    {% endfor %}
+    </div>
+    {%endif%}
+    <h5><a href="/travels">Home</a></h5>
+    <h5><a href="/clear">Logout</a></h5>
+    <h1>Add a Trip</h1>
+
+    <form action="/create_trip" method="POST">
+        {% csrf_token %}
+
+        <label for="dest">Destination</label>
+        <input type="text" name='destination' id="dest">
+
+        <p></p>
+        <label for="plans">Description</label>
+        <input type="text" name='plan' id="plans">
+
+        <p></p>
+        <label for="start_dates">Travel Date From:</label>
+        <input type="date" name="start_date" id="start_dates">
+
+        <p></p>
+        <label for="end_dates">Travel Date To:</label>
+        <input type="date" name="end_date" id="end_dates">
+
+
+        <p></p>
+        <input type="submit" value="Add">
+
+    </form>
+</body>
+
+</html>

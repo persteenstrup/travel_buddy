@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        {% load static %}
+
+<!-- The line above tells Django to be ready to listen for static files -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+
+<!--        <link rel="stylesheet" href="{% static 'travels/css/style.css' %}" media="screen" title="no title"  charset="utf-8"> -->
+<!-- Put the static files in the static folder inside your app.  Django collects files within all static folders and puts them within a single folder -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="{% static 'scripts/scripts.js' %}"></script>
+        <title>travels</title>
+    </head>
+
+    <body>
+        <h2><a href="/clear">Logout</a></h2>
+        <h1>Hello {{user.first_name}}!</h1>
+        
+        <h4>Your Trip Schedules</h4>
+        <table style="width:60%" style="border:2px solid black">
+            <thead>
+                <tr>
+                    <th align="center">Destination</th>
+                    <th align="center">Travel Start Date</th>
+                    <th align="center">Travel End Date</th>
+                    <th align="center">Plan</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for trip in my_trips%}
+                <tr>
+                    <td align="center"><a href="/travels/destination/{{trip.id}}">{{trip.destination}}</a></td>
+                    <td align="center">{{trip.start_date}}</td>
+                    <td align="center">{{trip.end_date}}</td>
+                    <td align="center">{{trip.plan}}</td>
+                </tr>
+                {% endfor %}
+                {% for trip in joined_trips%}
+                <tr>
+                    <td align="center"><a href="/travels/destination/{{trip.id}}">{{trip.destination}}</a></td>
+                    <td align="center">{{trip.start_date}}</td>
+                    <td align="center">{{trip.end_date}}</td>
+                    <td align="center">{{trip.plan}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    
+        <h4>Other Trips</h4>
+        <table style="width:60%" style="border:2px solid black">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Destination</th>
+                        <th>Travel Start Date</th>
+                        <th>Travel End Date</th>
+                        <th>Plan</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for trip in other_trips %}
+                    <tr>
+                        <td align="center">{{trip.created_by.first_name}} {{trip.created_by.last_name}}</td>
+                        <td align="center"><a href="/travels/destination/{{trip.id}}">{{trip.destination}}</a></td>
+                        <td align="center">{{trip.start_date}}</td>
+                        <td align="center">{{trip.end_end}}</td>
+                        <td align="center"><a href="/join/{{trip.id}}">Join</a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+        </table>
+        <h3><a href="/newtrip">Add Travel Plan</a></h3>    
+        
+    </body>
+</html>
